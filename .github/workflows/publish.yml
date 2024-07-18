@@ -26,5 +26,5 @@ jobs:
       - name: Build and publish
         run: ./gradlew publishAllPublicationsToGithubRepository
         env:
-          PROGUARD_GITHUB_USERNAME: ${{ github.repository_owner }}
-          PROGUARD_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORG_GRADLE_PROJECT_PROGUARD_GITHUB_USERNAME: ${{ github.repository_owner }}
+          ORG_GRADLE_PROJECT_PROGUARD_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
