@@ -32,6 +32,12 @@ dependencies {
 	testFixturesImplementation 'org.smali:smali:2.5.2'
 }
 
+jar {
+	manifest {
+		attributes('Automatic-Module-Name': 'proguard.android')
+	}
+}
+
 test {
 	useJUnitPlatform()
 }

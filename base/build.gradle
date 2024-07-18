@@ -38,7 +38,7 @@ dependencies {
 jar {
 	archiveBaseName = 'proguard-core'
 	manifest {
-		attributes('Implementation-Version': archiveVersion.get())
+		attributes('Implementation-Version': archiveVersion.get(), 'Automatic-Module-Name': 'proguard.core')
 	}
 }
 
