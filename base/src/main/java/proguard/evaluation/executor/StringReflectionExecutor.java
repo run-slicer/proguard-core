@@ -31,8 +31,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.ClassPool;
 import proguard.classfile.Clazz;
 import proguard.classfile.MethodSignature;
@@ -46,6 +44,7 @@ import proguard.evaluation.value.object.AnalyzedObject;
 import proguard.evaluation.value.object.AnalyzedObjectFactory;
 import proguard.util.ConstantMatcher;
 import proguard.util.FixedStringMatcher;
+import proguard.util.Logger;
 import proguard.util.StringMatcher;
 
 /**
@@ -54,7 +53,7 @@ import proguard.util.StringMatcher;
  */
 public class StringReflectionExecutor extends ReflectionExecutor {
 
-  private static final Logger log = LogManager.getLogger(StringReflectionExecutor.class);
+  private static final Logger log = Logger.getLogger(StringReflectionExecutor.class);
 
   private final ClassPool libraryClassPool;
 

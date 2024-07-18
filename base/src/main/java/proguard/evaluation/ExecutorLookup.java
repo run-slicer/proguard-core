@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import proguard.classfile.Clazz;
@@ -15,6 +13,7 @@ import proguard.classfile.util.ClassUtil;
 import proguard.evaluation.executor.Executor;
 import proguard.evaluation.executor.MethodExecutionInfo;
 import proguard.evaluation.value.TypedReferenceValue;
+import proguard.util.Logger;
 
 /**
  * Class for performing lookups of registered executors based on method signatures.
@@ -28,7 +27,7 @@ import proguard.evaluation.value.TypedReferenceValue;
  */
 final class ExecutorLookup {
 
-  private static final Logger log = LogManager.getLogger(ExecutorLookup.class);
+  private static final Logger log = Logger.getLogger(ExecutorLookup.class);
   private final Map<MethodSignature, Executor> executorFromSignature = new HashMap<>();
 
   private final Set<String> supportedClasses = new HashSet<>();

@@ -26,8 +26,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.stream.Collectors;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.cpa.algorithms.CpaAlgorithm;
 import proguard.analysis.cpa.defaults.BreadthFirstWaitlist;
 import proguard.analysis.cpa.defaults.Cfa;
@@ -49,6 +47,7 @@ import proguard.analysis.cpa.interfaces.Waitlist;
 import proguard.analysis.datastructure.callgraph.Call;
 import proguard.analysis.datastructure.callgraph.SymbolicCall;
 import proguard.classfile.Signature;
+import proguard.util.Logger;
 
 /**
  * This {@link TransferRelation} extends an analysis inter-procedurally. The transfer relation
@@ -67,7 +66,7 @@ public class BamTransferRelation<
         SignatureT extends Signature>
     implements TransferRelation {
 
-  private static final Logger log = LogManager.getLogger(BamTransferRelation.class);
+  private static final Logger log = Logger.getLogger(BamTransferRelation.class);
   private final CpaWithBamOperators<CfaNodeT, CfaEdgeT, SignatureT> wrappedCpa;
   // TODO: maybe we don't need the cfa
   private final Cfa<CfaNodeT, CfaEdgeT, SignatureT> cfa;

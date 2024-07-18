@@ -22,12 +22,11 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.ClassPool;
 import proguard.classfile.Clazz;
 import proguard.classfile.MethodSignature;
 import proguard.util.CallGraphWalker;
+import proguard.util.Logger;
 
 /**
  * Collection of all {@link Call}s in a program, optimized for retrieval of incoming and outgoing
@@ -37,7 +36,7 @@ import proguard.util.CallGraphWalker;
  */
 public class CallGraph {
 
-  private static final transient Logger log = LogManager.getLogger(CallGraph.class);
+  private static final transient Logger log = Logger.getLogger(CallGraph.class);
   public final Map<MethodSignature, Set<Call>> incoming;
   public final Map<MethodSignature, Set<Call>> outgoing;
 

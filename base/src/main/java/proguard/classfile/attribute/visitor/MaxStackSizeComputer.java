@@ -17,8 +17,6 @@
  */
 package proguard.classfile.attribute.visitor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.Clazz;
 import proguard.classfile.Method;
 import proguard.classfile.attribute.Attribute;
@@ -40,6 +38,7 @@ import proguard.exception.InstructionExceptionFormatter;
 import proguard.exception.ProguardCoreException;
 import proguard.util.ArrayUtil;
 import proguard.util.CircularIntBuffer;
+import proguard.util.Logger;
 
 /**
  * This {@link AttributeVisitor} computes the maximum stack size of the code attributes that it
@@ -58,7 +57,7 @@ public class MaxStackSizeComputer
   private static       boolean DEBUG = System.getProperty("ssc") != null;
   //*/
 
-  private static final Logger logger = LogManager.getLogger(MaxStackSizeComputer.class);
+  private static final Logger logger = Logger.getLogger(MaxStackSizeComputer.class);
   private final StackSizeConsumer stackSizeConsumer;
 
   protected boolean[] evaluated = new boolean[ClassEstimates.TYPICAL_CODE_LENGTH];

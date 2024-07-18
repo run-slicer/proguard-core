@@ -24,13 +24,12 @@ import static proguard.classfile.ClassConstants.TYPE_JAVA_LANG_STRING_BUILDER;
 import static proguard.evaluation.value.BasicValueFactory.UNKNOWN_VALUE;
 
 import java.util.Objects;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.cpa.defaults.LatticeAbstractState;
 import proguard.analysis.cpa.interfaces.AbstractState;
 import proguard.evaluation.value.IdentifiedReferenceValue;
 import proguard.evaluation.value.TypedReferenceValue;
 import proguard.evaluation.value.Value;
+import proguard.util.Logger;
 
 /**
  * An {@link AbstractState} for tracking JVM values.
@@ -39,7 +38,7 @@ import proguard.evaluation.value.Value;
  */
 public class ValueAbstractState implements LatticeAbstractState<ValueAbstractState> {
 
-  private static final Logger logger = LogManager.getLogger(ValueAbstractState.class);
+  private static final Logger logger = Logger.getLogger(ValueAbstractState.class);
   public static final ValueAbstractState UNKNOWN = new ValueAbstractState(UNKNOWN_VALUE);
   private Value value;
 

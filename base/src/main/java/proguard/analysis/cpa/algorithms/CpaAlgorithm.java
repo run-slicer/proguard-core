@@ -20,8 +20,6 @@ package proguard.analysis.cpa.algorithms;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.cpa.defaults.PrecisionAdjustmentResult;
 import proguard.analysis.cpa.interfaces.AbortOperator;
 import proguard.analysis.cpa.interfaces.AbstractState;
@@ -34,6 +32,7 @@ import proguard.analysis.cpa.interfaces.ReachedSet;
 import proguard.analysis.cpa.interfaces.StopOperator;
 import proguard.analysis.cpa.interfaces.TransferRelation;
 import proguard.analysis.cpa.interfaces.Waitlist;
+import proguard.util.Logger;
 
 /**
  * This is the <a
@@ -45,7 +44,7 @@ import proguard.analysis.cpa.interfaces.Waitlist;
  */
 public class CpaAlgorithm implements Algorithm {
 
-  private static final Logger log = LogManager.getLogger(CpaAlgorithm.class);
+  private static final Logger log = Logger.getLogger(CpaAlgorithm.class);
   private final TransferRelation transferRelation;
   private final MergeOperator mergeOperator;
   private final StopOperator stopOperator;

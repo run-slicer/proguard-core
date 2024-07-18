@@ -29,8 +29,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.Metrics.MetricType;
 import proguard.analysis.datastructure.CodeLocation;
 import proguard.analysis.datastructure.Location;
@@ -76,6 +74,7 @@ import proguard.evaluation.value.ParticularValueFactory;
 import proguard.evaluation.value.TypedReferenceValue;
 import proguard.evaluation.value.Value;
 import proguard.evaluation.value.ValueFactory;
+import proguard.util.Logger;
 import proguard.util.PartialEvaluatorUtils;
 
 /**
@@ -103,7 +102,7 @@ import proguard.util.PartialEvaluatorUtils;
  */
 public class CallResolver implements AttributeVisitor, ClassVisitor, InstructionVisitor {
 
-  private static final Logger log = LogManager.getLogger(CallResolver.class);
+  private static final Logger log = Logger.getLogger(CallResolver.class);
   /** Used to fill the {@link Call#controlFlowDependent} flag. */
   private final DominatorCalculator dominatorCalculator;
 

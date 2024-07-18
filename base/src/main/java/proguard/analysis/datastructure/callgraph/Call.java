@@ -21,8 +21,6 @@ package proguard.analysis.datastructure.callgraph;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.CallResolver;
 import proguard.analysis.CallVisitor;
 import proguard.analysis.datastructure.CodeLocation;
@@ -34,6 +32,7 @@ import proguard.classfile.util.ClassUtil;
 import proguard.classfile.visitor.MemberVisitor;
 import proguard.evaluation.value.IdentifiedReferenceValue;
 import proguard.evaluation.value.Value;
+import proguard.util.Logger;
 
 /**
  * Represents a method call. If the call target is a {@link Method} that is present in the class
@@ -44,7 +43,7 @@ import proguard.evaluation.value.Value;
  */
 public abstract class Call {
 
-  private static final Logger log = LogManager.getLogger(Call.class);
+  private static final Logger log = Logger.getLogger(Call.class);
   /** The location where the call was invoked. */
   public final CodeLocation caller;
   /**

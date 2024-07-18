@@ -25,8 +25,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.Metrics;
 import proguard.analysis.Metrics.MetricType;
 import proguard.analysis.datastructure.callgraph.Call;
@@ -41,7 +39,7 @@ import proguard.classfile.MethodSignature;
  */
 public class CallGraphWalker {
 
-  private static final Logger log = LogManager.getLogger(CallGraphWalker.class);
+  private static final Logger log = Logger.getLogger(CallGraphWalker.class);
   /** Call graph strands are no longer explored after a maximum distance from the original root. */
   public static final int MAX_DEPTH_DEFAULT = 100;
   /**

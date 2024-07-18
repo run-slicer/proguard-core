@@ -17,8 +17,6 @@
  */
 package proguard.preverify;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.*;
 import proguard.classfile.attribute.*;
 import proguard.classfile.attribute.visitor.*;
@@ -29,6 +27,7 @@ import proguard.classfile.util.*;
 import proguard.classfile.visitor.*;
 import proguard.exception.ErrorId;
 import proguard.exception.ProguardCoreException;
+import proguard.util.Logger;
 
 /**
  * This AttributeVisitor inlines local subroutines (jsr/ret) in the code attributes that it visits.
@@ -43,7 +42,7 @@ public class CodeSubroutineInliner
   private static       boolean DEBUG = System.getProperty("csi") != null;
   //*/
 
-  private static final Logger logger = LogManager.getLogger(CodeSubroutineInliner.class);
+  private static final Logger logger = Logger.getLogger(CodeSubroutineInliner.class);
 
   private final BranchTargetFinder branchTargetFinder = new BranchTargetFinder();
   private final CodeAttributeComposer codeAttributeComposer =

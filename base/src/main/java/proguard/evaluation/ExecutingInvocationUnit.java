@@ -39,8 +39,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import proguard.analysis.datastructure.CodeLocation;
@@ -76,6 +74,7 @@ import proguard.evaluation.value.ValueFactory;
 import proguard.evaluation.value.object.AnalyzedObject;
 import proguard.evaluation.value.object.AnalyzedObjectFactory;
 import proguard.evaluation.value.object.Model;
+import proguard.util.Logger;
 import proguard.util.PartialEvaluatorUtils;
 
 /**
@@ -101,7 +100,7 @@ import proguard.util.PartialEvaluatorUtils;
  * StringReflectionExecutor} and adding other {@link Executor}s.
  */
 public class ExecutingInvocationUnit extends BasicInvocationUnit {
-  private static final Logger log = LogManager.getLogger(ExecutingInvocationUnit.class);
+  private static final Logger log = Logger.getLogger(ExecutingInvocationUnit.class);
   @Nullable private Value[] parameters;
   private final boolean enableSameInstanceIdApproximation;
 

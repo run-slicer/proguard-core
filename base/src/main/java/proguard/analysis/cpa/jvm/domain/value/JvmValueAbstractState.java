@@ -22,8 +22,6 @@ import static proguard.classfile.ClassConstants.TYPE_JAVA_LANG_STRING;
 import static proguard.classfile.util.ClassUtil.internalTypeFromClassName;
 import static proguard.classfile.util.ClassUtil.isExtendable;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.cpa.defaults.MapAbstractState;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmCfaNode;
 import proguard.analysis.cpa.jvm.state.JvmAbstractState;
@@ -37,10 +35,11 @@ import proguard.evaluation.value.TypedReferenceValue;
 import proguard.evaluation.value.Value;
 import proguard.evaluation.value.ValueFactory;
 import proguard.evaluation.value.object.AnalyzedObjectFactory;
+import proguard.util.Logger;
 
 /** */
 public class JvmValueAbstractState extends JvmAbstractState<ValueAbstractState> {
-  private static final Logger logger = LogManager.getLogger(JvmValueAbstractState.class);
+  private static final Logger logger = Logger.getLogger(JvmValueAbstractState.class);
 
   private final ValueFactory valueFactory;
 

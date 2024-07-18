@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.cpa.bam.BamCache;
 import proguard.analysis.cpa.bam.BamCpa;
 import proguard.analysis.cpa.bam.BlockAbstraction;
@@ -74,6 +72,7 @@ import proguard.classfile.instruction.SwitchInstruction;
 import proguard.classfile.instruction.VariableInstruction;
 import proguard.classfile.instruction.visitor.InstructionVisitor;
 import proguard.classfile.util.ClassUtil;
+import proguard.util.Logger;
 
 /**
  * The {@link JvmMemoryLocationTransferRelation} computes the backward successors of an {@link
@@ -119,7 +118,7 @@ public class JvmMemoryLocationTransferRelation<
         AbstractStateT extends LatticeAbstractState<AbstractStateT>>
     implements TransferRelation {
 
-  private static final Logger log = LogManager.getLogger(JvmMemoryLocationTransferRelation.class);
+  private static final Logger log = Logger.getLogger(JvmMemoryLocationTransferRelation.class);
   private final AbstractStateT threshold;
   private final JvmCfa cfa;
   private final BamCache<MethodSignature> cache;

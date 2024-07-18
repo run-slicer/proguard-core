@@ -17,16 +17,15 @@
  */
 package proguard.evaluation.value;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import proguard.classfile.Clazz;
 import proguard.evaluation.value.object.AnalyzedObject;
 import proguard.evaluation.value.object.AnalyzedObjectFactory;
+import proguard.util.Logger;
 
 /** Representation of a partially evaluated reference value. */
 public abstract class ReferenceValue extends Category1Value {
-  private static final Logger log = LogManager.getLogger(ReferenceValue.class);
+  private static final Logger log = Logger.getLogger(ReferenceValue.class);
   private static final boolean PRINT_ERRORS =
       System.getProperty("proguard.value.logerrors") != null;
   // Basic unary methods.

@@ -59,7 +59,7 @@ publishing {
 			repositories {
 				maven {
 					name = 'Github'
-					url = uri('https://maven.pkg.github.com/guardsquare/proguard-core')
+					url = uri('https://maven.pkg.github.com/run-slicer/proguard-core')
 					credentials {
 						username = project.findProperty('PROGUARD_GITHUB_USERNAME')
 						password = project.findProperty('PROGUARD_GITHUB_TOKEN')

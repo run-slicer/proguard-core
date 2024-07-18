@@ -18,7 +18,7 @@
 package proguard.classfile.util;
 
 import java.util.List;
-import org.apache.logging.log4j.Logger;
+import proguard.util.Logger;
 
 public class WarningLogger extends WarningPrinter {
 

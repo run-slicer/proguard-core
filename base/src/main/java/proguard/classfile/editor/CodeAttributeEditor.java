@@ -22,8 +22,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.Clazz;
 import proguard.classfile.Method;
 import proguard.classfile.ProgramClass;
@@ -74,6 +72,7 @@ import proguard.classfile.instruction.visitor.InstructionVisitor;
 import proguard.exception.ErrorId;
 import proguard.exception.ProguardCoreException;
 import proguard.util.ArrayUtil;
+import proguard.util.Logger;
 
 /**
  * This {@link AttributeVisitor} accumulates specified changes to code, and then applies these
@@ -149,7 +148,7 @@ public class CodeAttributeEditor
 
   private static final int LABEL_FLAG = 0x20000000;
 
-  private static final Logger logger = LogManager.getLogger(CodeAttributeEditor.class);
+  private static final Logger logger = Logger.getLogger(CodeAttributeEditor.class);
 
   private final boolean updateFrameSizes;
   private final boolean shrinkInstructions;

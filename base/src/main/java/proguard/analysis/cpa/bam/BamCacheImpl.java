@@ -26,11 +26,10 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.cpa.interfaces.AbstractState;
 import proguard.analysis.cpa.interfaces.Precision;
 import proguard.classfile.Signature;
+import proguard.util.Logger;
 
 /**
  * A simple implementation of {@link BamCache} where the cache is implemented as a {@link HashMap}.
@@ -39,7 +38,7 @@ import proguard.classfile.Signature;
  */
 public class BamCacheImpl<SignatureT extends Signature> implements BamCache<SignatureT> {
 
-  private static final Logger log = LogManager.getLogger(BamCacheImpl.class);
+  private static final Logger log = Logger.getLogger(BamCacheImpl.class);
 
   private final Map<SignatureT, Map<HashKey, BlockAbstraction>> cache = new HashMap<>();
   private int size = 0;

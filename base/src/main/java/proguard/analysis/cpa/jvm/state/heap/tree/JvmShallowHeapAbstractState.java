@@ -21,12 +21,11 @@ package proguard.analysis.cpa.jvm.state.heap.tree;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.cpa.defaults.LatticeAbstractState;
 import proguard.analysis.cpa.defaults.MapAbstractState;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmCfaNode;
 import proguard.analysis.cpa.jvm.state.heap.JvmHeapAbstractState;
+import proguard.util.Logger;
 
 /**
  * A shallow heap models objects as atomic abstract states thus having only one level of depth.
@@ -36,7 +35,7 @@ import proguard.analysis.cpa.jvm.state.heap.JvmHeapAbstractState;
  */
 public class JvmShallowHeapAbstractState<ReferenceT, StateT extends LatticeAbstractState<StateT>>
     implements JvmHeapAbstractState<StateT> {
-  private static final Logger logger = LogManager.getLogger(JvmShallowHeapAbstractState.class);
+  private static final Logger logger = Logger.getLogger(JvmShallowHeapAbstractState.class);
 
   public final MapAbstractState<ReferenceT, StateT> referenceToObject;
   protected final Class<ReferenceT> referenceClass;

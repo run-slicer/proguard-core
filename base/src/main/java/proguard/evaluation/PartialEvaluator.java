@@ -18,8 +18,6 @@
 package proguard.evaluation;
 
 import java.util.Arrays;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.Clazz;
 import proguard.classfile.Method;
 import proguard.classfile.attribute.Attribute;
@@ -53,6 +51,7 @@ import proguard.exception.ErrorId;
 import proguard.exception.InstructionExceptionFormatter;
 import proguard.exception.ProguardCoreException;
 import proguard.util.CircularIntBuffer;
+import proguard.util.Logger;
 
 /**
  * This {@link AttributeVisitor} performs partial evaluation on the code attributes that it visits.
@@ -72,7 +71,7 @@ public class PartialEvaluator implements AttributeVisitor, ExceptionInfoVisitor 
   public static boolean ENABLE_NEW_EXCEPTIONS =
       System.getProperty("proguard.pe.newexceptions") != null;
 
-  private static final Logger logger = LogManager.getLogger(PartialEvaluator.class);
+  private static final Logger logger = Logger.getLogger(PartialEvaluator.class);
 
   // The analysis will generalize stack/vars after visiting an instruction this many times.
   private static final int GENERALIZE_AFTER_N_EVALUATIONS = 5;

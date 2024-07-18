@@ -18,7 +18,6 @@
 
 package proguard.exception;
 
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.Clazz;
 import proguard.classfile.Method;
 import proguard.classfile.instruction.Instruction;
@@ -26,6 +25,7 @@ import proguard.classfile.instruction.InstructionFactory;
 import proguard.evaluation.TracedStack;
 import proguard.evaluation.TracedVariables;
 import proguard.util.CircularIntBuffer;
+import proguard.util.Logger;
 
 /**
  * This class is used to format an exception with the previous instructions. It is used by the

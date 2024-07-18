@@ -5,7 +5,6 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.mockk.spyk
 import io.mockk.verify
-import org.apache.logging.log4j.LogManager
 import proguard.classfile.Clazz
 import proguard.classfile.ProgramClass
 import proguard.classfile.kotlin.KotlinClassKindMetadata
@@ -19,9 +18,10 @@ import proguard.classfile.util.kotlin.KotlinMetadataInitializer
 import proguard.resources.file.ResourceFilePool
 import proguard.testutils.ClassPoolBuilder
 import proguard.testutils.KotlinSource
+import proguard.util.Logger
 
 class KotlinMetadataAsserterTest : BehaviorSpec({
-    val warningLogger = WarningLogger(LogManager.getLogger(KotlinMetadataAsserter::class.java))
+    val warningLogger = WarningLogger(Logger.getLogger(KotlinMetadataAsserter::class.java))
     Given("an interface with default implementation") {
         val (programClassPool, libraryClassPool) = ClassPoolBuilder.fromSource(
             KotlinSource(

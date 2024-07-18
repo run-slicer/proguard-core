@@ -23,8 +23,6 @@ import static proguard.classfile.kotlin.KotlinConstants.FUNCTION_NAME_MANGLE_SEP
 import static proguard.classfile.kotlin.KotlinConstants.TYPE_KOTLIN_JVM_JVMNAME;
 import static proguard.classfile.util.ClassUtil.internalSimpleClassName;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.ClassConstants;
 import proguard.classfile.Clazz;
 import proguard.classfile.Field;
@@ -113,6 +111,7 @@ import proguard.classfile.visitor.ClassVisitor;
 import proguard.classfile.visitor.MemberVisitor;
 import proguard.exception.ErrorId;
 import proguard.exception.ProguardCoreException;
+import proguard.util.Logger;
 
 /**
  * This {@link ClassVisitor} fixes references of constant pool entries, fields, methods, attributes
@@ -135,7 +134,7 @@ public class ClassReferenceFixer
         LocalVariableTypeInfoVisitor,
         AnnotationVisitor,
         ElementValueVisitor {
-  private static final Logger logger = LogManager.getLogger(ClassReferenceFixer.class);
+  private static final Logger logger = Logger.getLogger(ClassReferenceFixer.class);
 
   private NameGenerationStrategy newNameStrategy;
 

@@ -18,9 +18,8 @@
 package proguard.io;
 
 import java.io.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.util.ExtensionMatcher;
+import proguard.util.Logger;
 
 /**
  * This {@link DataEntryReader} writes the ZIP entries and files that it reads to a given {@link
@@ -33,7 +32,7 @@ public class DataEntryCopier implements DataEntryReader {
 
   private static final int BUFFER_SIZE = 1024;
 
-  private static final Logger logger = LogManager.getLogger(DataEntryCopier.class);
+  private static final Logger logger = Logger.getLogger(DataEntryCopier.class);
 
   private final DataEntryWriter dataEntryWriter;
   private final byte[] buffer = new byte[BUFFER_SIZE];

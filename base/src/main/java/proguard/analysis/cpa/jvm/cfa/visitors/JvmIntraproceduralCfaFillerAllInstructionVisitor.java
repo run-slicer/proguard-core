@@ -23,8 +23,6 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.analysis.cpa.jvm.cfa.JvmCfa;
 import proguard.analysis.cpa.jvm.cfa.edges.JvmAssumeCaseCfaEdge;
 import proguard.analysis.cpa.jvm.cfa.edges.JvmAssumeCfaEdge;
@@ -51,6 +49,7 @@ import proguard.classfile.instruction.SwitchInstruction;
 import proguard.classfile.instruction.TableSwitchInstruction;
 import proguard.classfile.instruction.VariableInstruction;
 import proguard.classfile.instruction.visitor.InstructionVisitor;
+import proguard.util.Logger;
 
 /**
  * This {@link AttributeVisitor} visits the {@link CodeAttribute} of a {@link Method} and performs
@@ -79,7 +78,7 @@ public class JvmIntraproceduralCfaFillerAllInstructionVisitor implements Attribu
 
   private final JvmCfa cfa;
   private static final Logger log =
-      LogManager.getLogger(JvmIntraproceduralCfaFillerAllInstructionVisitor.class);
+      Logger.getLogger(JvmIntraproceduralCfaFillerAllInstructionVisitor.class);
 
   public JvmIntraproceduralCfaFillerAllInstructionVisitor(JvmCfa cfa) {
     this.cfa = cfa;

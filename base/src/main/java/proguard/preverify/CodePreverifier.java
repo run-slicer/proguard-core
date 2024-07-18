@@ -18,8 +18,6 @@
 package proguard.preverify;
 
 import java.util.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.*;
 import proguard.classfile.attribute.*;
 import proguard.classfile.attribute.preverification.*;
@@ -31,6 +29,7 @@ import proguard.evaluation.*;
 import proguard.evaluation.value.*;
 import proguard.exception.ErrorId;
 import proguard.exception.ProguardCoreException;
+import proguard.util.Logger;
 
 /**
  * This {@link AttributeVisitor} adds preverification information (for Java Micro Edition or for
@@ -45,7 +44,7 @@ public class CodePreverifier implements AttributeVisitor {
   private static       boolean DEBUG = System.getProperty("cp") != null;
   //*/
 
-  private static final Logger logger = LogManager.getLogger(CodePreverifier.class);
+  private static final Logger logger = Logger.getLogger(CodePreverifier.class);
 
   private static final int AT_METHOD_ENTRY = -1;
 
