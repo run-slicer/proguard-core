@@ -27,8 +27,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import proguard.classfile.AccessConstants;
 import proguard.classfile.ClassConstants;
 import proguard.classfile.Clazz;
@@ -40,6 +38,7 @@ import proguard.evaluation.exception.ArrayStoreTypeException;
 import proguard.evaluation.exception.IncompleteClassHierarchyException;
 import proguard.evaluation.exception.ValueTypeException;
 import proguard.evaluation.value.object.AnalyzedObjectFactory;
+import proguard.util.Logger;
 
 /**
  * This {@link ReferenceValue} represents a partially evaluated reference value. It has a type and a
@@ -65,7 +64,7 @@ public class TypedReferenceValue extends ReferenceValue {
 
   private static final boolean DEBUG = false;
 
-  private static final Logger logger = LogManager.getLogger(TypedReferenceValue.class);
+  private static final Logger logger = Logger.getLogger(TypedReferenceValue.class);
 
   protected final String type;
   protected final Clazz referencedClass;
