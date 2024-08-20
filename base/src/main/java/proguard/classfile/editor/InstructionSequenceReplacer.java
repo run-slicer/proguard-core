@@ -396,8 +396,28 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
           instructionSequenceMatcher.matchedInstructionOffset(matchedInstructionIndex);
 
       // Create the instruction.
-      replacementInstructions[index].accept(
-          clazz, null, codeAttribute, matchedInstructionOffset, this);
+      Instruction insn = replacementInstructions[index]/*.accept(clazz, null, codeAttribute, matchedInstructionOffset, this)*/;
+
+      // fix TeaVM analyzer bug, we can't have nice things
+      if (insn instanceof SimpleInstruction) {
+        this.visitSimpleInstruction(clazz, null, codeAttribute, matchedInstructionOffset, (SimpleInstruction) insn);
+      } else if (insn instanceof VariableInstruction) {
+        this.visitVariableInstruction(clazz, null, codeAttribute, matchedInstructionOffset, (VariableInstruction) insn);
+      } else if (insn instanceof ConstantInstruction) {
+        this.visitConstantInstruction(clazz, null, codeAttribute, matchedInstructionOffset, (ConstantInstruction) insn);
+      } else if (insn instanceof BranchInstruction) {
+        this.visitBranchInstruction(clazz, null, codeAttribute, matchedInstructionOffset, (BranchInstruction) insn);
+      } else if (insn instanceof TableSwitchInstruction) {
+        this.visitTableSwitchInstruction(clazz, null, codeAttribute, matchedInstructionOffset, (TableSwitchInstruction) insn);
+      } else if (insn instanceof LookUpSwitchInstruction) {
+        this.visitLookUpSwitchInstruction(clazz, null, codeAttribute, matchedInstructionOffset, (LookUpSwitchInstruction) insn);
+      } else if (insn instanceof Catch) {
+        this.visitCatchInstruction(clazz, null, codeAttribute, matchedInstructionOffset, (Catch) insn);
+      } else if (insn instanceof Label) {
+        this.visitLabelInstruction(clazz, null, codeAttribute, matchedInstructionOffset, (Label) insn);
+      } else {
+        this.visitAnyInstruction(clazz, null, codeAttribute, matchedInstructionOffset, insn);
+      }
 
       // Return it.
       return replacementInstruction;
