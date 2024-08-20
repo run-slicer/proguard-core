@@ -147,7 +147,7 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
   private final InstructionVisitor extraInstructionVisitor;
 
   private final MyReplacementInstructionFactory replacementInstructionFactory =
-      new MyReplacementInstructionFactory();
+      new MyReplacementInstructionFactory(this);
 
   /**
    * Creates a new InstructionSequenceReplacer.
@@ -382,21 +382,26 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
    * This class creates replacement instructions for matched sequences, with any matched arguments
    * filled out.
    */
-  private class MyReplacementInstructionFactory implements InstructionVisitor {
+  private static class MyReplacementInstructionFactory implements InstructionVisitor {
+    private final InstructionSequenceReplacer replacer;
     private Instruction replacementInstruction;
+
+    private MyReplacementInstructionFactory(InstructionSequenceReplacer replacer) {
+      this.replacer = replacer;
+    }
 
     /** Creates the replacement instruction for the given index in the instruction sequence. */
     public Instruction create(Clazz clazz, CodeAttribute codeAttribute, int index) {
       int matchedInstructionIndex =
-          index < instructionSequenceMatcher.instructionCount()
+          index < replacer.instructionSequenceMatcher.instructionCount()
               ? index
-              : instructionSequenceMatcher.instructionCount() - 1;
+              : replacer.instructionSequenceMatcher.instructionCount() - 1;
 
       int matchedInstructionOffset =
-          instructionSequenceMatcher.matchedInstructionOffset(matchedInstructionIndex);
+          replacer.instructionSequenceMatcher.matchedInstructionOffset(matchedInstructionIndex);
 
       // Create the instruction.
-      replacementInstructions[index].accept(
+      replacer.replacementInstructions[index].accept(
           clazz, null, codeAttribute, matchedInstructionOffset, this);
 
       // Return it.
@@ -415,7 +420,8 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
       replacementInstruction =
           new SimpleInstruction(
               simpleInstruction.opcode,
-              matchedArgument(clazz, method, codeAttribute, offset, simpleInstruction.constant));
+              replacer.matchedArgument(
+                  clazz, method, codeAttribute, offset, simpleInstruction.constant));
     }
 
     @Override
@@ -428,9 +434,9 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
       replacementInstruction =
           new VariableInstruction(
               variableInstruction.opcode,
-              matchedArgument(
+              replacer.matchedArgument(
                   clazz, method, codeAttribute, offset, variableInstruction.variableIndex),
-              instructionSequenceMatcher.matchedArgument(variableInstruction.constant));
+              replacer.instructionSequenceMatcher.matchedArgument(variableInstruction.constant));
     }
 
     @Override
@@ -443,8 +449,9 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
       replacementInstruction =
           new ConstantInstruction(
               constantInstruction.opcode,
-              matchedConstantIndex((ProgramClass) clazz, constantInstruction.constantIndex),
-              instructionSequenceMatcher.matchedArgument(constantInstruction.constant));
+              replacer.matchedConstantIndex(
+                  (ProgramClass) clazz, constantInstruction.constantIndex),
+              replacer.instructionSequenceMatcher.matchedArgument(constantInstruction.constant));
     }
 
     @Override
@@ -457,7 +464,7 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
       replacementInstruction =
           new BranchInstruction(
               branchInstruction.opcode,
-              matchedBranchOffset(offset, branchInstruction.branchOffset));
+              replacer.matchedBranchOffset(offset, branchInstruction.branchOffset));
     }
 
     @Override
@@ -470,10 +477,10 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
       replacementInstruction =
           new TableSwitchInstruction(
               tableSwitchInstruction.opcode,
-              matchedBranchOffset(offset, tableSwitchInstruction.defaultOffset),
-              instructionSequenceMatcher.matchedArgument(tableSwitchInstruction.lowCase),
-              instructionSequenceMatcher.matchedArgument(tableSwitchInstruction.highCase),
-              matchedJumpOffsets(offset, tableSwitchInstruction.jumpOffsets));
+              replacer.matchedBranchOffset(offset, tableSwitchInstruction.defaultOffset),
+              replacer.instructionSequenceMatcher.matchedArgument(tableSwitchInstruction.lowCase),
+              replacer.instructionSequenceMatcher.matchedArgument(tableSwitchInstruction.highCase),
+              replacer.matchedJumpOffsets(offset, tableSwitchInstruction.jumpOffsets));
     }
 
     @Override
@@ -486,9 +493,9 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
       replacementInstruction =
           new LookUpSwitchInstruction(
               lookUpSwitchInstruction.opcode,
-              matchedBranchOffset(offset, lookUpSwitchInstruction.defaultOffset),
-              instructionSequenceMatcher.matchedArguments(lookUpSwitchInstruction.cases),
-              matchedJumpOffsets(offset, lookUpSwitchInstruction.jumpOffsets));
+              replacer.matchedBranchOffset(offset, lookUpSwitchInstruction.defaultOffset),
+              replacer.instructionSequenceMatcher.matchedArguments(lookUpSwitchInstruction.cases),
+              replacer.matchedJumpOffsets(offset, lookUpSwitchInstruction.jumpOffsets));
     }
 
     // Similar methods for pseudo-instructions.
@@ -499,7 +506,8 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
       // pseudo-instruction for the code attribute editor.
       // Then make sure we create a unique label, because
       // there may be other matching sequences.
-      replacementInstruction = codeAttributeEditor.label(uniqueLabel(label.identifier));
+      replacementInstruction =
+          replacer.codeAttributeEditor.label(replacer.uniqueLabel(label.identifier));
     }
 
     public void visitCatchInstruction(
@@ -509,11 +517,11 @@ public class InstructionSequenceReplacer implements InstructionVisitor, Constant
       // Then make sure we create and reference unique labels,
       // because there may be other matching sequences.
       replacementInstruction =
-          codeAttributeEditor.catch_(
-              uniqueLabel(catch_.identifier),
-              uniqueLabel(catch_.startOffset),
-              uniqueLabel(catch_.endOffset),
-              matchedConstantIndex((ProgramClass) clazz, catch_.catchType));
+          replacer.codeAttributeEditor.catch_(
+              replacer.uniqueLabel(catch_.identifier),
+              replacer.uniqueLabel(catch_.startOffset),
+              replacer.uniqueLabel(catch_.endOffset),
+              replacer.matchedConstantIndex((ProgramClass) clazz, catch_.catchType));
     }
   }
 
