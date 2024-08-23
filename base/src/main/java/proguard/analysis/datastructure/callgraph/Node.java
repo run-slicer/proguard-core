@@ -48,7 +48,6 @@ public class Node {
   public final Set<CodeLocation> outgoingCallLocations = new HashSet<>();
 
   public final Set<Node> successors = new HashSet<>();
-  public EntryPoint matchingEntrypoint = null;
   public boolean isTruncated = false;
 
   public Node(MethodSignature signature) {
@@ -78,7 +77,7 @@ public class Node {
     if (this.signature.equals(signature)) {
       return true;
     }
-    return successors.stream().anyMatch(s -> s.predecessorsContain(signature));
+    return predecessors.stream().anyMatch(s -> s.predecessorsContain(signature));
   }
 
   /**
