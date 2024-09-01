@@ -22,6 +22,7 @@ import static proguard.classfile.ClassConstants.TYPE_JAVA_LANG_STRING;
 import static proguard.classfile.ClassConstants.TYPE_JAVA_LANG_STRING_BUFFER;
 import static proguard.classfile.ClassConstants.TYPE_JAVA_LANG_STRING_BUILDER;
 import static proguard.evaluation.value.BasicValueFactory.UNKNOWN_VALUE;
+import static proguard.exception.ErrorId.ANALYSIS_VALUE_ABSTRACT_STATE_CONDITION_UNCHECKED;
 
 import java.util.Objects;
 import proguard.analysis.cpa.defaults.LatticeAbstractState;
@@ -29,6 +30,7 @@ import proguard.analysis.cpa.interfaces.AbstractState;
 import proguard.evaluation.value.IdentifiedReferenceValue;
 import proguard.evaluation.value.TypedReferenceValue;
 import proguard.evaluation.value.Value;
+import proguard.exception.ProguardCoreException;
 import proguard.util.Logger;
 
 /**
@@ -123,7 +125,10 @@ public class ValueAbstractState implements LatticeAbstractState<ValueAbstractSta
             Object objectB = that.value.referenceValue().value();
 
             if (objectA == null && objectB == null) {
-              throw new IllegalStateException("This condition should have been already checked");
+              throw new ProguardCoreException.Builder(
+                      "This condition should already have been checked",
+                      ANALYSIS_VALUE_ABSTRACT_STATE_CONDITION_UNCHECKED)
+                  .build();
             }
             if (objectA == null || objectB == null) {
               return false;

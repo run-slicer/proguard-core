@@ -18,6 +18,8 @@
 
 package proguard.analysis.cpa.bam;
 
+import static proguard.exception.ErrorId.ANALYSIS_BAM_TRANSFER_RELATION_STATE_NOT_LOCATION_DEPENDENT;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -47,6 +49,7 @@ import proguard.analysis.cpa.interfaces.Waitlist;
 import proguard.analysis.datastructure.callgraph.Call;
 import proguard.analysis.datastructure.callgraph.SymbolicCall;
 import proguard.classfile.Signature;
+import proguard.exception.ProguardCoreException;
 import proguard.util.Logger;
 
 /**
@@ -158,8 +161,10 @@ public class BamTransferRelation<
   public Collection<? extends AbstractState> generateAbstractSuccessors(
       AbstractState abstractState, Precision precision) {
     if (!(abstractState instanceof ProgramLocationDependent)) {
-      throw new IllegalArgumentException(
-          "The abstract state of type " + AbstractState.class + " is not location dependent");
+      throw new ProguardCoreException.Builder(
+              "The abstract state of type " + AbstractState.class + " is not location dependent",
+              ANALYSIS_BAM_TRANSFER_RELATION_STATE_NOT_LOCATION_DEPENDENT)
+          .build();
     }
 
     CfaNodeT currentLocation =

@@ -18,6 +18,8 @@
 
 package proguard.analysis.cpa.jvm.cfa.visitors;
 
+import static proguard.exception.ErrorId.ANALYSIS_JVM_INTRAPROCEDURAL_CFA_FILLER_ALL_INSTRUCTION_UNEXPECTED_SWITCH;
+
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -49,6 +51,7 @@ import proguard.classfile.instruction.SwitchInstruction;
 import proguard.classfile.instruction.TableSwitchInstruction;
 import proguard.classfile.instruction.VariableInstruction;
 import proguard.classfile.instruction.visitor.InstructionVisitor;
+import proguard.exception.ProguardCoreException;
 import proguard.util.Logger;
 
 /**
@@ -409,7 +412,10 @@ public class JvmIntraproceduralCfaFillerAllInstructionVisitor implements Attribu
       // check just because the subsequent check on type, should never happen
       if (!(instruction instanceof TableSwitchInstruction
           || instruction instanceof LookUpSwitchInstruction)) {
-        throw new IllegalArgumentException("Unexpected switch instruction type");
+        throw new ProguardCoreException.Builder(
+                "Unexpected switch instruction type",
+                ANALYSIS_JVM_INTRAPROCEDURAL_CFA_FILLER_ALL_INSTRUCTION_UNEXPECTED_SWITCH)
+            .build();
       }
 
       JvmCfaNode currentNode = connect(offset, clazz);
